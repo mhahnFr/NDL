@@ -1,0 +1,26 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'mhahnFr'
+version = '0.0.1'
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+java {
+    withJavadocJar()
+}
+
+tasks.register('native', Exec) {
+    commandLine 'false'
+}
+
+classes.dependsOn 'native'
+
+// TODO: Publishing
