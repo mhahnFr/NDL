@@ -21,6 +21,15 @@
 
 package java.mhahnFr.NDL;
 
+/**
+ * This class contains the constant values of the library.
+ *
+ * @author mhahnFr
+ * @since 10.05.24
+ */
 public abstract class Constants {
+    private Constants() {}
+
+    /** The name of the native library without extension. */
     public static final String LIBRARY_NAME = "ndl";
 }

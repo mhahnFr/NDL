@@ -21,7 +21,15 @@
 
 package java.mhahnFr.NDL;
 
-public class NDL {
+/**
+ * This class acts as main class of this project.
+ *
+ * @author mhahnFr
+ * @since 10.05.24
+ */
+public abstract class NDL {
+    private NDL() {}
+
     static {
         System.loadLibrary(Constants.LIBRARY_NAME);
         // TODO: Initialize
