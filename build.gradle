@@ -19,6 +19,8 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import org.gradle.internal.jvm.Jvm
+
 plugins {
     id 'java-library'
 }
@@ -39,7 +41,8 @@ java {
 }
 
 tasks.register('native', Exec) {
-    commandLine 'false'
+    environment 'JAVA_HOME', Jvm.current().javaHome
+    commandLine 'make', '-C', 'src/native'
 }
 
 classes.dependsOn 'native'
