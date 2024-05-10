@@ -20,9 +20,9 @@
 #
 
 NAME = ndl
-NAME_STATIC = $(NAME).a
-NAME_SHARED = $(NAME).so
-NAME_DYLIB  = $(NAME).dylib
+NAME_STATIC = lib$(NAME).a
+NAME_SHARED = lib$(NAME).so
+NAME_DYLIB  = lib$(NAME).dylib
 
 SRCS = $(wildcard *.c)
 OBJS = $(patsubst %.c, %.o, $(SRCS))
@@ -37,7 +37,7 @@ endif
 CFLAGS = -I $(JAVA_HOME)/include
 LDFLAGS =
 
-ifdef ($(shell uname -s),Darwin)
+ifeq ($(shell uname -s),Darwin)
 	TARGET = $(NAME_DYLIB)
 	CFLAGS += -I $(JAVA_HOME)/include/darwin
 	OBJS += $(patsubst %.m, %.o, $(SRCS_MACOS_OBJC))
