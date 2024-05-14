@@ -23,6 +23,9 @@ plugins {
     id 'cpp-library'
 }
 
+group = 'mhahnFr'
+version = '0.0.1'
+
 def commonSrc = 'src' + File.separator + 'common'
 
 library {

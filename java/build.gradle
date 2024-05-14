@@ -19,10 +19,9 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-//import org.gradle.internal.jvm.Jvm
-
 plugins {
     id 'java-library'
+    id 'maven-publish'
 }
 
 group = 'mhahnFr'
@@ -36,15 +35,19 @@ sourceSets {
     }
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
 java {
     withJavadocJar()
 }
-
-//tasks.register('native', Exec) {
-//    environment 'JAVA_HOME', Jvm.current().javaHome
-//    commandLine 'make', '-C', 'src/native'
-//}
-
-//classes.dependsOn 'native'
 
 // TODO: Publishing
