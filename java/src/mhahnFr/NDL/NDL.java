@@ -34,4 +34,10 @@ public abstract class NDL {
         System.loadLibrary(Constants.LIBRARY_NAME);
         // TODO: Initialize
     }
+
+    public static void hello() {
+        System.out.println("Hello");
+    }
+
+    public static native void hello2();
 }
