@@ -19,7 +19,14 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-rootProject.name = 'NDL'
+plugins {
+    id 'cpp-library'
+}
 
-include 'java'
-include 'native'
+def commonSrc = 'src' + File.separator + 'common'
+
+library {
+    source.from file(commonSrc)
+    // TODO: Platform specific
+    privateHeaders.from file(commonSrc)
+}
