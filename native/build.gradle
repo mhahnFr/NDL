@@ -19,6 +19,8 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import org.gradle.internal.jvm.Jvm
+
 plugins {
     id 'cpp-library'
 }
@@ -32,4 +34,10 @@ library {
     source.from file(commonSrc)
     // TODO: Platform specific
     privateHeaders.from file(commonSrc)
+}
+
+tasks.withType(CppCompile).configureEach {
+    compilerArgs.addAll '-I', Jvm.current().javaHome.absolutePath + '/include',
+            // TODO: Handle native stuff properly
+    '-I', Jvm.current().javaHome.absolutePath + '/include/darwin'
 }

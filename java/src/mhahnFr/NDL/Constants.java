@@ -31,5 +31,5 @@ public abstract class Constants {
     private Constants() {}
 
     /** The name of the native library without extension. */
-    public static final String LIBRARY_NAME = "ndl";
+    public static final String LIBRARY_NAME = "NDL-native";
 }
