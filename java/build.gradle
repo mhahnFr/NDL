@@ -19,7 +19,7 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import org.gradle.internal.jvm.Jvm
+//import org.gradle.internal.jvm.Jvm
 
 plugins {
     id 'java-library'
@@ -31,7 +31,7 @@ version = '0.0.1'
 sourceSets {
     main {
         java {
-            srcDirs = ['src' + File.separator + 'java']
+            srcDirs = ['src']
         }
     }
 }
@@ -40,11 +40,11 @@ java {
     withJavadocJar()
 }
 
-tasks.register('native', Exec) {
-    environment 'JAVA_HOME', Jvm.current().javaHome
-    commandLine 'make', '-C', 'src/native'
-}
+//tasks.register('native', Exec) {
+//    environment 'JAVA_HOME', Jvm.current().javaHome
+//    commandLine 'make', '-C', 'src/native'
+//}
 
-classes.dependsOn 'native'
+//classes.dependsOn 'native'
 
 // TODO: Publishing
