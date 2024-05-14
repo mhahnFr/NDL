@@ -31,7 +31,7 @@ version = '0.0.1'
 sourceSets {
     main {
         java {
-            srcDirs = ['src']
+            srcDirs = ['src' + File.separator + 'java']
         }
     }
 }

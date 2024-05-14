@@ -19,7 +19,7 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package java.mhahnFr.NDL;
+package mhahnFr.NDL;
 
 /**
  * This class contains the constant values of the library.

@@ -25,4 +25,4 @@
  * @author mhahnFr
  * @since 10.05.24
  */
-package java.mhahnFr.NDL;
+package mhahnFr.NDL;
