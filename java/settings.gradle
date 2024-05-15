@@ -19,10 +19,4 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-rootProject.name = 'NDL-complete'
-
-include 'NDL'
-project(':NDL').projectDir = file('java')
-
-include 'NDL-native'
-project(':NDL-native').projectDir = file('native')
+rootProject.name = 'NDL'

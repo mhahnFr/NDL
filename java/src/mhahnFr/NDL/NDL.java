@@ -38,6 +38,4 @@ public abstract class NDL {
     public static void hello() {
         System.out.println("Hello");
     }
-
-    public static native void hello2();
 }
