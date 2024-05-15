@@ -58,3 +58,10 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Native ###
+*.o
+*.so
+*.dylib
+*.a
+*.dSYM/

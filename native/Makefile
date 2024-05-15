@@ -24,13 +24,13 @@ NAME_STATIC = lib$(NAME).a
 NAME_SHARED = lib$(NAME).so
 NAME_DYLIB  = lib$(NAME).dylib
 
-SRCS = $(wildcard *.c)
+SRCS = $(shell find src/common -type f -name \*.c)
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 DEPS = $(patsubst %.c, %.d, $(SRCS))
 
-SRCS_MACOS_OBJC = $(wildcard *.m)
+SRCS_MACOS_OBJC = $(shell find src/macOS -type f -name \*.m)
 
-CFLAGS =
+CFLAGS = -Wall -Wextra -pedantic -std=c11
 LDFLAGS =
 
 ifeq ($(shell uname -s),Darwin)
@@ -42,7 +42,23 @@ else
 	TARGET = $(NAME_SHARED)
 endif
 
-$(TARGET): $(OBJS)
+.phony: main
+main: $(TARGET)
+
+$(NAME_STATIC): $(OBJS)
+	$(AR) -crs $@ $(OBJS)
+
+$(NAME_SHARED): $(OBJS)
+	$(CC) $(LDFLAGS) -shared -o $@ $(OBJS)
+
+$(NAME_DYLIB): $(OBJS)
+	$(CC) $(LDFLAGS) -dynamiclib -o $@ $(OBJS)
+
+%.c: %.o
+	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
+
+%.m: %.o
+	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
 
 .phony: clean
 clean:
