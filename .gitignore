@@ -1,5 +1,5 @@
 #
-# NDL - Native Dark mode Listener for Java.
+# NDL - Native Dark mode Listener.
 #
 # Copyright (C) 2024  mhahnFr
 #
@@ -19,49 +19,11 @@
 # along with NDL.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-.gradle
-build/
-!java/gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### IntelliJ IDEA ###
-.idea/
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
-.vscode/
-
-### Mac OS ###
-.DS_Store
-
-### Native ###
 *.o
+.*
+*.xcodeproj/
+
+*.a
 *.so
 *.dylib
-*.a
-*.dSYM/
+*~
