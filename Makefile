@@ -1,5 +1,5 @@
 #
-# NDL - Native Dark mode Listener for Java.
+# NDL - Native Dark mode Listener.
 #
 # Copyright (C) 2024  mhahnFr
 #
