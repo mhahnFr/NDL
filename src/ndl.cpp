@@ -21,9 +21,10 @@
 
 #include <ndl.h>
 
+#include "platform/platform.h"
+
 auto ndl_queryDarkMode() -> bool {
-    // TODO: Implement
-    return false;
+    return ndl_platform_queryDarkMode();
 }
 
 auto ndl_registerCallback(ndl_darkModeCallback callback) -> bool {
