@@ -35,7 +35,6 @@ LDFLAGS =
 
 ifeq ($(shell uname -s),Darwin)
 	TARGET = $(NAME_DYLIB)
-	CFLAGS += -I $(JAVA_HOME)/include/darwin
 	OBJS += $(patsubst %.m, %.o, $(SRCS_MACOS_OBJC))
 	DEPS += $(patsubst %.m, %.d, $(SRCS_MACOS_OBJC))
 else
@@ -54,10 +53,10 @@ $(NAME_SHARED): $(OBJS)
 $(NAME_DYLIB): $(OBJS)
 	$(CC) $(LDFLAGS) -dynamiclib -o $@ $(OBJS)
 
-%.c: %.o
+%.o: %.c
 	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
 
-%.m: %.o
+%.o: %.m
 	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
 
 .phony: clean
