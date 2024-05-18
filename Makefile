@@ -28,9 +28,15 @@ SRCS = $(shell find src/common -type f -name \*.c)
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 DEPS = $(patsubst %.c, %.d, $(SRCS))
 
+SRCS_CPP = $(shell find src/common -type f -name \*.cpp)
+OBJS += $(patsubst %.cpp, %.o, $(SRCS_CPP))
+DEPS += $(patsubst %.cpp, %.d, $(SRCS_CPP))
+
 SRCS_MACOS_OBJC = $(shell find src/macOS -type f -name \*.m)
 
-CFLAGS = -Wall -Wextra -pedantic -std=c11
+COMMON_FLAGS = -Wall -Wextra -pedantic -I 'include'
+CFLAGS = $(COMMON_FLAGS) -std=c11
+CXXFLAGS = $(COMMON_FLAGS) -std=c++11
 LDFLAGS =
 
 ifeq ($(shell uname -s),Darwin)
@@ -56,12 +62,15 @@ $(NAME_DYLIB): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
 
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -MMD -MP -c -o $@ $<
+
 %.o: %.m
 	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
 
 .phony: clean
 clean:
-	- $(RM) $(OBJS) $(NAME_SHARED) $(NAME_STATIC) $(NAME_DYLIB)
+	- $(RM) $(OBJS) $(DEPS) $(NAME_SHARED) $(NAME_STATIC) $(NAME_DYLIB)
 
 .phony: re
 re: clean
