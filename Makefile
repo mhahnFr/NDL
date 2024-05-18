@@ -24,15 +24,15 @@ NAME_STATIC = lib$(NAME).a
 NAME_SHARED = lib$(NAME).so
 NAME_DYLIB  = lib$(NAME).dylib
 
-SRCS = $(shell find src/common -type f -name \*.c)
+SRCS = $(shell find src -type f -name \*.c \! -path src/platform)
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 DEPS = $(patsubst %.c, %.d, $(SRCS))
 
-SRCS_CPP = $(shell find src/common -type f -name \*.cpp)
+SRCS_CPP = $(shell find src -type f -name \*.cpp \! -path src/platform)
 OBJS += $(patsubst %.cpp, %.o, $(SRCS_CPP))
 DEPS += $(patsubst %.cpp, %.d, $(SRCS_CPP))
 
-SRCS_MACOS_OBJC = $(shell find src/macOS -type f -name \*.m)
+SRCS_MACOS_OBJC = $(shell find src/platform/macos -type f -name \*.m)
 
 COMMON_FLAGS = -Wall -Wextra -pedantic -I 'include'
 CFLAGS = $(COMMON_FLAGS) -std=c11
@@ -43,6 +43,7 @@ ifeq ($(shell uname -s),Darwin)
 	TARGET = $(NAME_DYLIB)
 	OBJS += $(patsubst %.m, %.o, $(SRCS_MACOS_OBJC))
 	DEPS += $(patsubst %.m, %.d, $(SRCS_MACOS_OBJC))
+	LDFLAGS += -framework AppKit
 else
 	TARGET = $(NAME_SHARED)
 endif
