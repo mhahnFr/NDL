@@ -65,8 +65,4 @@
     return [[self callbacks] count] == 0;
 }
 
-- (void) registerListener {
-    // TODO: Implement
-}
-
 @end
