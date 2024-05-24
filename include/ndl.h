@@ -28,7 +28,7 @@ extern "C" {
 
 #include <stdbool.h>
 
-typedef void (*ndl_darkModeCallback)(bool);
+typedef void (*ndl_darkModeCallback)(void);
 
 bool ndl_queryDarkMode(void);
 bool ndl_registerCallback(ndl_darkModeCallback callback);
