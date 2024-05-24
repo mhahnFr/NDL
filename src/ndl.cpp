@@ -19,20 +19,47 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <vector>
+
 #include <ndl.h>
 
 #include "platform/platform.h"
+
+namespace ndl {
+std::vector<ndl_darkModeCallback> listeners;
+bool registered = false;
+}
 
 auto ndl_queryDarkMode() -> bool {
     return ndl_platform_queryDarkMode();
 }
 
 auto ndl_registerCallback(ndl_darkModeCallback callback) -> bool {
-    // TODO: Implement
-    return false;
+    if (ndl::listeners.empty() && !ndl::registered) {
+        if (!(ndl::registered = ndl_platform_register())) {
+            return false;
+        }
+    }
+    try {
+        ndl::listeners.push_back(callback);
+    } catch (...) {
+        return false;
+    }
+    return true;
 }
 
 auto ndl_deregisterCallback(ndl_darkModeCallback callback) -> bool {
-    // TODO: Implement
-    return false;
+    const auto& it = std::find(ndl::listeners.cbegin(), ndl::listeners.cend(), callback);
+    if (it == ndl::listeners.cend()) {
+        return false;
+    }
+    try {
+        ndl::listeners.erase(it);
+    } catch (...) {
+        return false;
+    }
+    if (ndl::listeners.empty() && ndl::registered) {
+        ndl::registered = ndl_platform_deregister();
+    }
+    return true;
 }
