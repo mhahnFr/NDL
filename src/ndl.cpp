@@ -28,6 +28,10 @@
 namespace ndl {
 std::vector<ndl_darkModeCallback> listeners;
 bool registered = false;
+
+static inline void callback() {
+    __builtin_printf("NDL: Callback called\n");
+}
 }
 
 auto ndl_queryDarkMode() -> bool {
@@ -36,7 +40,7 @@ auto ndl_queryDarkMode() -> bool {
 
 auto ndl_registerCallback(ndl_darkModeCallback callback) -> bool {
     if (ndl::listeners.empty() && !ndl::registered) {
-        if (!(ndl::registered = ndl_platform_register())) {
+        if (!(ndl::registered = ndl_platform_register(ndl::callback))) {
             return false;
         }
     }
@@ -59,7 +63,7 @@ auto ndl_deregisterCallback(ndl_darkModeCallback callback) -> bool {
         return false;
     }
     if (ndl::listeners.empty() && ndl::registered) {
-        ndl::registered = ndl_platform_deregister();
+        ndl::registered = ndl_platform_deregister(ndl::callback);
     }
     return true;
 }

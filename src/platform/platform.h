@@ -28,10 +28,12 @@ extern "C" {
 
 #include <stdbool.h>
 
+typedef void (*ndl_platform_callback)(void);
+
 bool ndl_platform_queryDarkMode(void);
 
-bool ndl_platform_register(void);
-bool ndl_platform_deregister(void);
+bool ndl_platform_register(ndl_platform_callback callback);
+bool ndl_platform_deregister(ndl_platform_callback callback);
 
 #ifdef __cplusplus
 } // extern "C"

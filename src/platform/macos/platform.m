@@ -23,19 +23,19 @@
 
 #import "../platform.h"
 
-bool ndl_platform_queryDarkMode() {
+bool ndl_platform_queryDarkMode(void) {
     const NSAppearanceName appearanceName = [[[NSApplication sharedApplication] effectiveAppearance] name];
 
     return appearanceName == NSAppearanceNameDarkAqua
         || appearanceName == NSAppearanceNameVibrantDark;
 }
 
-bool ndl_platform_register() {
+bool ndl_platform_register(ndl_platform_callback callback) {
     // TODO: Implement
     return false;
 }
 
-bool ndl_platform_deregister() {
+bool ndl_platform_deregister(ndl_platform_callback callback) {
     // TODO: Implement
     return false;
 }
