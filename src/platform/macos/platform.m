@@ -21,7 +21,11 @@
 
 #import <AppKit/AppKit.h>
 
+#import "NDLListener.h"
+
 #import "../platform.h"
+
+static NDLListener* ndl_listenerObject = nil;
 
 bool ndl_platform_queryDarkMode(void) {
     const NSAppearanceName appearanceName = [[[NSApplication sharedApplication] effectiveAppearance] name];
@@ -31,11 +35,23 @@ bool ndl_platform_queryDarkMode(void) {
 }
 
 bool ndl_platform_register(ndl_platform_callback callback) {
-    // TODO: Implement
-    return false;
+    if (ndl_listenerObject == nil) {
+        if ((ndl_listenerObject = [NDLListener new]) == nil) {
+            return false;
+        }
+    }
+    return [ndl_listenerObject addCallback: callback];
 }
 
 bool ndl_platform_deregister(ndl_platform_callback callback) {
-    // TODO: Implement
-    return false;
+    if (ndl_listenerObject == nil) {
+        return false;
+    }
+    if (![ndl_listenerObject removeCallback: callback]) {
+        return false;
+    }
+    if ([ndl_listenerObject empty]) {
+        ndl_listenerObject = nil;
+    }
+    return true;
 }
