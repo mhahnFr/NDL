@@ -30,7 +30,10 @@ std::vector<ndl_darkModeCallback> listeners;
 bool registered = false;
 
 static inline void callback() {
-    __builtin_printf("NDL: Callback called\n");
+    const auto dark = ndl_queryDarkMode();
+    for (const auto& cb : listeners) {
+        cb(dark);
+    }
 }
 }
 
