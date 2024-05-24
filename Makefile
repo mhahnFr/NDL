@@ -55,10 +55,10 @@ $(NAME_STATIC): $(OBJS)
 	$(AR) -crs $@ $(OBJS)
 
 $(NAME_SHARED): $(OBJS)
-	$(CC) $(LDFLAGS) -shared -o $@ $(OBJS)
+	$(CXX) $(LDFLAGS) -shared -o $@ $(OBJS)
 
 $(NAME_DYLIB): $(OBJS)
-	$(CC) $(LDFLAGS) -dynamiclib -o $@ $(OBJS)
+	$(CXX) $(LDFLAGS) -dynamiclib -o $@ $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
@@ -67,7 +67,7 @@ $(NAME_DYLIB): $(OBJS)
 	$(CXX) $(CXXFLAGS) -MMD -MP -c -o $@ $<
 
 %.o: %.m
-	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
+	$(CC) $(CFLAGS) -fobjc-arc -MMD -MP -c -o $@ $<
 
 .phony: clean
 clean:
