@@ -30,6 +30,9 @@ extern "C" {
 
 bool ndl_platform_queryDarkMode(void);
 
+bool ndl_platform_register(void);
+bool ndl_platform_deregister(void);
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
