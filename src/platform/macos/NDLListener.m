@@ -21,9 +21,13 @@
 
 #import "NDLListener.h"
 
+#define NDL_THEME_CHANGED_NOTIFICATION @"AppleInterfaceThemeChangedNotification"
+
 @interface NDLListener ()
 
 @property(nonnull) NSMutableArray<NSValue*>* callbacks;
+
+- (void) themeChangedWithNotification: (NSNotification*) notification;
 
 @end
 
@@ -34,13 +38,17 @@
 
     if (self != nil) {
         [self setCallbacks: [NSMutableArray new]];
-        // TODO: Register
+        [[NSDistributedNotificationCenter defaultCenter] addObserver: self
+                                                            selector: @selector(themeChangedWithNotification:)
+                                                                name: NDL_THEME_CHANGED_NOTIFICATION
+                                                              object: nil
+                                                  suspensionBehavior: NSNotificationSuspensionBehaviorCoalesce];
     }
     return self;
 }
 
 - (void) dealloc {
-    // TODO: Deregister
+    [[NSDistributedNotificationCenter defaultCenter] removeObserver: self];
 }
 
 - (BOOL) addCallback: (ndl_platform_callback) callback {
@@ -63,6 +71,12 @@
 
 - (BOOL) empty {
     return [[self callbacks] count] == 0;
+}
+
+- (void) themeChangedWithNotification: (NSNotification*) notification {
+    for (NSValue* element in [self callbacks]) {
+        ((ndl_platform_callback) [element pointerValue])();
+    }
 }
 
 @end
