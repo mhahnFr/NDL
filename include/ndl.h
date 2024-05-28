@@ -19,8 +19,8 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef ndl_h
-#define ndl_h
+#ifndef __ndl_h
+#define __ndl_h
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,4 +38,4 @@ bool ndl_deregisterCallback(ndl_darkModeCallback callback);
 } // extern "C"
 #endif
 
-#endif /* ndl_h */
+#endif /* __ndl_h */
