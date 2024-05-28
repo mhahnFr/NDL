@@ -23,10 +23,32 @@
 
 #import "../platform.h"
 
+/**
+ * Objects of this class represent dark mode listener objects for macOS.
+ */
 @interface NDLListener : NSObject
 
+/**
+ * Adds the given callback.
+ *
+ * @param callback the callback function to be registered
+ * @return whether the function was registered successfully
+ */
 - (BOOL) addCallback: (ndl_platform_callback) callback;
+
+/**
+ * Removes the given callback function.
+ *
+ * @param callback the callback function to be removed
+ * @return whether the function was removed successfully
+ */
 - (BOOL) removeCallback: (ndl_platform_callback) callback;
+
+/**
+ * Returns whether no callback functions are currently registered.
+ *
+ * @return whether the callback function array is empty
+ */
 - (BOOL) empty;
 
 @end
