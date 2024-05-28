@@ -28,11 +28,33 @@ extern "C" {
 
 #include <stdbool.h>
 
+/** The callback function prototype. */
 typedef void (*ndl_platform_callback)(void);
 
+/**
+ * Returns whether the current windowing system uses a dark mode theme.
+ *
+ * @return whether the system uses a dark mode
+ */
 bool ndl_platform_queryDarkMode(void);
 
+/**
+ * @brief Registers the given callback function.
+ *
+ * The given callback function is called when the system has or is about to
+ * switch between dark and light mode.
+ *
+ * @param callback the callback function to be registered
+ * @return whether the function was registered successfully
+ */
 bool ndl_platform_register(ndl_platform_callback callback);
+
+/**
+ * Deregisters the given callback function.
+ *
+ * @param callback the callback function to be deregistered
+ * @return whether the function was deregistered successfully
+ */
 bool ndl_platform_deregister(ndl_platform_callback callback);
 
 #ifdef __cplusplus
