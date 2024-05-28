@@ -19,8 +19,8 @@
  * along with NDL.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef platform_h
-#define platform_h
+#ifndef __ndl_platform_h
+#define __ndl_platform_h
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,4 +39,4 @@ bool ndl_platform_deregister(ndl_platform_callback callback);
 } // extern "C"
 #endif
 
-#endif /* platform_h */
+#endif /* __ndl_platform_h */
