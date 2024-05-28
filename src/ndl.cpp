@@ -25,10 +25,20 @@
 
 #include "platform/platform.h"
 
+/**
+ * The main namespace of the NDL library.
+ */
 namespace ndl {
+/** Container holding the registered listener functions.                    */
 std::vector<ndl_darkModeCallback> listeners;
+/** Indicates whether the library has registered itself in the native part. */
 bool registered = false;
 
+/**
+ * The callback function to be registered in the native part.
+ *
+ * Calls all currently registered listener functions.
+ */
 static inline void callback() {
     for (const auto& cb : listeners) {
         cb();
