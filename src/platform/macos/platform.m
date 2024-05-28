@@ -25,6 +25,7 @@
 
 #import "../platform.h"
 
+/** The listener object used to listen to appearance changes. */
 static NDLListener* ndl_listenerObject = nil;
 
 bool ndl_platform_queryDarkMode(void) {
