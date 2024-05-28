@@ -28,10 +28,35 @@ extern "C" {
 
 #include <stdbool.h>
 
+/** The required prototype of a listener function. */
 typedef void (*ndl_darkModeCallback)(void);
 
+/**
+ * @brief Queries whether the current windowing system uses a dark theme.
+ *
+ * If an error happens `false` is returned.
+ *
+ * @return whether the current windowing system uses a dark theme
+ */
 bool ndl_queryDarkMode(void);
+
+/**
+ * @brief Registers the given function as dark mode listener.
+ *
+ * This function is called when the system has or is about to switch its theme
+ * between light and dark mode.
+ *
+ * @param callback the callback function to be registered
+ * @return whether the listener was registered successfully
+ */
 bool ndl_registerCallback(ndl_darkModeCallback callback);
+
+/**
+ * Deregisters the given listener function.
+ *
+ * @param callback the listener function to be deregistered
+ * @return whether the function was deregistered successfully
+ */
 bool ndl_deregisterCallback(ndl_darkModeCallback callback);
 
 #ifdef __cplusplus
