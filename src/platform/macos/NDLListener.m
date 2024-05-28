@@ -21,12 +21,19 @@
 
 #import "NDLListener.h"
 
+/** The internal name of the theme change notification. */
 #define NDL_THEME_CHANGED_NOTIFICATION @"AppleInterfaceThemeChangedNotification"
 
 @interface NDLListener ()
 
+/** Mutable array holding the registered callback functions. */
 @property(nonnull) NSMutableArray<NSValue*>* callbacks;
 
+/**
+ * Callback function for the theme changed notification.
+ *
+ * @param notification the broadcasted notification
+ */
 - (void) themeChangedWithNotification: (NSNotification*) notification;
 
 @end
