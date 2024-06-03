@@ -60,7 +60,7 @@
 
 - (BOOL) addCallback: (ndl_platform_callback) callback {
     @try {
-        [[self callbacks] addObject: [NSValue valueWithPointer: callback]];
+        [[self callbacks] addObject: [NSValue valueWithPointer: (void*) callback]];
     } @catch (...) {
         return NO;
     }
@@ -69,7 +69,7 @@
 
 - (BOOL) removeCallback: (ndl_platform_callback) callback {
     @try {
-        [[self callbacks] removeObject: [NSValue valueWithPointer: callback]];
+        [[self callbacks] removeObject: [NSValue valueWithPointer: (void*) callback]];
     } @catch (...) {
         return NO;
     }
