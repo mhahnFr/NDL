@@ -43,7 +43,8 @@ ifeq ($(shell uname -s),Darwin)
 	TARGET = $(NAME_DYLIB)
 	OBJS += $(patsubst %.m, %.o, $(SRCS_MACOS_OBJC))
 	DEPS += $(patsubst %.m, %.d, $(SRCS_MACOS_OBJC))
-	LDFLAGS += -framework AppKit
+	COMMON_FLAGS += -arch arm64 -arch x86_64
+	LDFLAGS += -framework AppKit -arch arm64 -arch x86_64 -current_version 0.1.1 -compatibility_version 0.1
 else
 	TARGET = $(NAME_SHARED)
 endif
