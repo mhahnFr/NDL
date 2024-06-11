@@ -22,19 +22,17 @@
 #import "NDLListener.h"
 
 /** The internal name of the theme change notification. */
-#define NDL_THEME_CHANGED_NOTIFICATION @"AppleInterfaceThemeChangedNotification"
+#define NDL_THEME_KEY_PATH @"AppleInterfaceStyle"
 
 @interface NDLListener ()
 
 /** Mutable array holding the registered callback functions. */
 @property(nonnull) NSMutableArray<NSValue*>* callbacks;
 
-/**
- * Callback function for the theme changed notification.
- *
- * @param notification the broadcasted notification
- */
-- (void) themeChangedWithNotification: (NSNotification*) notification;
+- (void) observeValueForKeyPath: (NSString*) keyPath
+                       ofObject: (id) object
+                         change: (NSDictionary<NSKeyValueChangeKey, id>*) change
+                        context: (void*) context;
 
 @end
 
@@ -45,17 +43,18 @@
 
     if (self != nil) {
         [self setCallbacks: [NSMutableArray new]];
-        [[NSDistributedNotificationCenter defaultCenter] addObserver: self
-                                                            selector: @selector(themeChangedWithNotification:)
-                                                                name: NDL_THEME_CHANGED_NOTIFICATION
-                                                              object: nil
-                                                  suspensionBehavior: NSNotificationSuspensionBehaviorCoalesce];
+        [[NSUserDefaults standardUserDefaults] addObserver: self
+                                                forKeyPath: NDL_THEME_KEY_PATH
+                                                   options: NSKeyValueObservingOptionNew
+                                                   context: nil];
     }
     return self;
 }
 
 - (void) dealloc {
-    [[NSDistributedNotificationCenter defaultCenter] removeObserver: self];
+    [[NSUserDefaults standardUserDefaults] removeObserver: self
+                                               forKeyPath: NDL_THEME_KEY_PATH
+                                                  context: nil];
 }
 
 - (BOOL) addCallback: (ndl_platform_callback) callback {
@@ -80,7 +79,10 @@
     return [[self callbacks] count] == 0;
 }
 
-- (void) themeChangedWithNotification: (NSNotification*) notification {
+- (void) observeValueForKeyPath: (NSString*) keyPath
+                       ofObject: (id) object
+                         change: (NSDictionary<NSKeyValueChangeKey,id>*) change
+                        context: (void*) context {
     for (NSValue* element in [self callbacks]) {
         ((ndl_platform_callback) [element pointerValue])();
     }
