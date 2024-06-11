@@ -34,7 +34,7 @@ DEPS += $(patsubst %.cpp, %.d, $(SRCS_CPP))
 
 SRCS_MACOS_OBJC = $(shell find src/platform/macos -type f -name \*.m)
 
-COMMON_FLAGS = -Wall -Wextra -pedantic -I 'include'
+COMMON_FLAGS = -Wall -Wextra -pedantic -Ofast -I 'include'
 CFLAGS = $(COMMON_FLAGS) -std=c11
 CXXFLAGS = $(COMMON_FLAGS) -std=c++11
 LDFLAGS =

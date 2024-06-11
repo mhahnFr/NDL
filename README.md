@@ -58,6 +58,9 @@ int main(void) {
     ndl_registerCallback(darkModeCallback);
     
     // Enter the main application loop...
+    // Example macOS: [[NSApplication sharedApplication] run];
+    
+    // Some where inside the main application loop:
     if (themeChanged) {
         printf("Dark mode changed to: %s\n", ndl_queryDarkMode() ? "Dark" : "Light");
         themeChanged = false;
